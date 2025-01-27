@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FaSun, FaMoon, FaApple, FaTelegramPlane, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
 
@@ -15,14 +15,15 @@ const App = () => {
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
-  const nextSlide = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  // Wrap nextSlide in useCallback to prevent it from changing on every render
+  const nextSlide = useCallback(() => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length), [images.length]);
 
   const prevSlide = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
 
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
     return () => clearInterval(interval);
-  }, [nextSlide]);  // Adding nextSlide as a dependency
+  }, [nextSlide]); // Adding nextSlide as a dependency
 
   return (
     <div
@@ -105,9 +106,7 @@ const App = () => {
               <div
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-4 h-4 rounded-full cursor-pointer ${
-                  currentIndex === index ? "bg-blue-500" : "bg-gray-500"
-                }`}
+                className={`w-4 h-4 rounded-full cursor-pointer ${currentIndex === index ? "bg-blue-500" : "bg-gray-500"}`}
               ></div>
             ))}
           </div>
@@ -193,4 +192,3 @@ const App = () => {
 };
 
 export default App;
-
