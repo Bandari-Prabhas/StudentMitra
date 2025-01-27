@@ -62,7 +62,7 @@ const MainPage = ({ darkMode, toggleDarkMode }) => {
             <a href="#home" className="hover:text-blue-500">Home</a>
             <a href="#about" className="hover:text-blue-500">About Us</a>
             <a href="#workshop" className="hover:text-blue-500">Workshops</a>
-            <a href="#courses" className="hover:text-blue-500">Our Courses</a>
+            <a href="#courses" className="hover:text-blue-500">Courses</a>
             <a href="#mission" className="hover:text-blue-500">Our Mission & Vision</a>
           </nav>
 
