@@ -19,7 +19,6 @@ const App = () => {
 
   const prevSlide = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
 
-  // Include `nextSlide` in the dependency array to prevent the warning
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
     return () => clearInterval(interval);
