@@ -19,10 +19,11 @@ const App = () => {
 
   const prevSlide = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
 
+  // Include `nextSlide` in the dependency array to prevent the warning
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [nextSlide]);  // Adding nextSlide as a dependency
 
   return (
     <div
@@ -85,7 +86,7 @@ const App = () => {
         <div className="relative w-full overflow-hidden rounded-md shadow-lg h-[500px]">
           <img
             src={images[currentIndex]}
-            alt={`carousel-image-${currentIndex}`}
+            alt={`carousel-slide-${currentIndex}`}
             className="w-full h-full object-cover transition-transform duration-700 ease-in-out"
           />
           <button
@@ -137,7 +138,7 @@ const App = () => {
           <div className="w-[300px] h-[400px] bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow-lg flex flex-col">
             <img
               src="https://www.ecomm-guru.com/wp-content/uploads/2023/05/course_offered.jpg"
-              alt="Course Image 1"
+              alt="Course 1"
               className="w-full h-[200px] object-cover mb-4"
             />
             <h3 className="text-xl font-semibold">Course 1</h3>
@@ -148,7 +149,7 @@ const App = () => {
           <div className="w-[300px] h-[400px] bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow-lg flex flex-col">
             <img
               src="https://blog.ipleaders.in/wp-content/uploads/2021/05/online-course-blog-header.jpg"
-              alt="Course Image 2"
+              alt="Course 2"
               className="w-full h-[200px] object-cover mb-4"
             />
             <h3 className="text-xl font-semibold">Course 2</h3>
