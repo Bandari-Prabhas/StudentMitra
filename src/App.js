@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FaSun, FaMoon, FaAndroid, FaApple, FaTelegramPlane, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { FaSun, FaMoon, FaApple, FaTelegramPlane, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
+
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,30 +13,27 @@ const App = () => {
     "https://mentor-group.org/wp-content/uploads/2018/04/Communication-Skills-e1408966879321.jpg",
   ];
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  const nextSlide = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
 
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
+  const prevSlide = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 3000); // Change slide every 3 seconds
+    const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, []);
 
   return (
-    <div className={darkMode ? "dark bg-gray-700 text-white min-h-screen flex flex-col" : "bg-white text-gray-700 min-h-screen flex flex-col"}>
+    <div
+      className={
+        darkMode
+          ? "dark bg-gray-700 text-white min-h-screen flex flex-col"
+          : "bg-white text-gray-700 min-h-screen flex flex-col"
+      }
+    >
       {/* Top Navbar */}
       <div className="bg-gradient-to-r from-blue-500 to-blue-950 text-white p-4 flex justify-between items-center">
-
         <div className="flex items-center space-x-4 ml-32">
           <h2 className="text-lg font-semibold">Download Now:</h2>
           <IoLogoAndroid size={35} className="cursor-pointer text-green-800 rounded-full" />
@@ -44,9 +42,8 @@ const App = () => {
         <div className="flex items-center space-x-4 mr-32">
           <h2 className="text-lg font-semibold">Follow us:</h2>
           <FaTelegramPlane size={44} className="cursor-pointer rounded-full bg-blue-400 p-2" />
-<FaWhatsapp size={44} className="cursor-pointer rounded-full bg-green-500 p-2" />
-<FaYoutube size={44} className="cursor-pointer rounded-full bg-red-600 p-2" />
-
+          <FaWhatsapp size={44} className="cursor-pointer rounded-full bg-green-500 p-2" />
+          <FaYoutube size={44} className="cursor-pointer rounded-full bg-red-600 p-2" />
         </div>
       </div>
 
@@ -55,20 +52,29 @@ const App = () => {
         <div className="container mx-auto flex justify-between items-center">
           <div className="text-3xl font-bold text-blue-500">Student Mitra</div>
           <nav className="flex space-x-8 text-lg font-semibold text-gray-700">
-            <a href="#" className="hover:text-blue-500">Home</a>
-            <a href="#about" className="hover:text-blue-500">About Us</a>
-            <a href="#workshop" className="hover:text-blue-500">Workshops</a>
-            <a href="#courses" className="hover:text-blue-500">Our Courses</a>
-            <a href="#courses" className="hover:text-blue-500">Our mission & vision</a>
+            <a href="#home" className="hover:text-blue-500">
+              Home
+            </a>
+            <a href="#about" className="hover:text-blue-500">
+              About Us
+            </a>
+            <a href="#workshop" className="hover:text-blue-500">
+              Workshops
+            </a>
+            <a href="#courses" className="hover:text-blue-500">
+              Our Courses
+            </a>
+            <a href="#mission" className="hover:text-blue-500">
+              Our Mission & Vision
+            </a>
           </nav>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
-          >
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
             Login/Signup
           </button>
           <button
             onClick={toggleDarkMode}
-            className="ml-4 p-3 rounded-full bg-blue-500 text-white">
+            className="ml-4 p-3 rounded-full bg-blue-500 text-white"
+          >
             {darkMode ? <FaSun /> : <FaMoon />}
           </button>
         </div>
@@ -108,7 +114,7 @@ const App = () => {
         </div>
       </div>
 
-      {/* Other Sections */}
+      {/* About Section */}
       <section id="about" className="container mx-auto p-6 text-center">
         <h2 className="text-4xl font-bold mb-4">Join Us</h2>
         <p className="mt-4 text-gray-900 dark:text-gray-800">
@@ -116,7 +122,7 @@ const App = () => {
         </p>
         <div className="flex justify-center gap-8 mt-6">
           <button className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600">
-            Join Student Ambasidors
+            Join Student Ambassadors
           </button>
           <button className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600">
             Request Workshop Now
@@ -124,36 +130,36 @@ const App = () => {
         </div>
       </section>
 
+      {/* Courses Section */}
       <section id="courses" className="container mx-auto p-6 text-center">
-  <h2 className="text-4xl font-bold mb-4">Our Courses</h2>
-  <div className="flex justify-center gap-8 flex-wrap mt-6">
-    <div className="w-[300px] h-[400px] bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow-lg flex flex-col">
-      <img
-        src="https://www.ecomm-guru.com/wp-content/uploads/2023/05/course_offered.jpg"
-        alt="Course Image 1"
-        className="w-full h-[200px] object-cover mb-4"
-      />
-      <h3 className="text-xl font-semibold">Course 1</h3>
-      <p className="mt-2 text-gray-600 dark:text-gray-300 flex-grow">
-        Learn the basics of coding.
-      </p>
-    </div>
-    <div className="w-[300px] h-[400px] bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow-lg flex flex-col">
-      <img
-        src="https://blog.ipleaders.in/wp-content/uploads/2021/05/online-course-blog-header.jpg"
-        alt="Course Image 2"
-        className="w-full h-[200px] object-cover mb-4"
-      />
-      <h3 className="text-xl font-semibold">Course 2</h3>
-      <p className="mt-2 text-gray-600 dark:text-gray-300 flex-grow">
-        Advanced machine learning.
-      </p>
-    </div>
-  </div>
-</section>
-  
+        <h2 className="text-4xl font-bold mb-4">Our Courses</h2>
+        <div className="flex justify-center gap-8 flex-wrap mt-6">
+          <div className="w-[300px] h-[400px] bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow-lg flex flex-col">
+            <img
+              src="https://www.ecomm-guru.com/wp-content/uploads/2023/05/course_offered.jpg"
+              alt="Course Image 1"
+              className="w-full h-[200px] object-cover mb-4"
+            />
+            <h3 className="text-xl font-semibold">Course 1</h3>
+            <p className="mt-2 text-gray-600 dark:text-gray-300 flex-grow">
+              Learn the basics of coding.
+            </p>
+          </div>
+          <div className="w-[300px] h-[400px] bg-gray-100 dark:bg-gray-800 p-6 rounded-md shadow-lg flex flex-col">
+            <img
+              src="https://blog.ipleaders.in/wp-content/uploads/2021/05/online-course-blog-header.jpg"
+              alt="Course Image 2"
+              className="w-full h-[200px] object-cover mb-4"
+            />
+            <h3 className="text-xl font-semibold">Course 2</h3>
+            <p className="mt-2 text-gray-600 dark:text-gray-300 flex-grow">
+              Advanced machine learning.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      {/* Enhanced Footer */}
+      {/* Footer */}
       <footer className="bg-gray-200 text-gray-700 p-8 text-center mt-auto">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
