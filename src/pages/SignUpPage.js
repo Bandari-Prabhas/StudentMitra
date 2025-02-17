@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import sm1 from '../assets/sm1.jpg';
 import { useNavigate } from 'react-router-dom';
+import {
+  FaApple,
+  FaGoogle,
+} from "react-icons/fa";
 
 const SignUpPage = () => {
   const today = new Date();
@@ -8,12 +12,9 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // Add logic for sign-up success here
-    // For example, after successful sign-up, navigate to SignIn page
     navigate('/signin');
   };
 
-  // Function to get the current week days
   const getWeekDays = (date) => {
     const firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
     const days = [];
@@ -25,12 +26,10 @@ const SignUpPage = () => {
 
   const weekDays = getWeekDays(new Date(currentDate));
 
-  // Function to go to the previous week
   const handlePreviousWeek = () => {
     setCurrentDate((prev) => new Date(prev.setDate(prev.getDate() - 7)));
   };
 
-  // Function to go to the next week
   const handleNextWeek = () => {
     setCurrentDate((prev) => new Date(prev.setDate(prev.getDate() + 7)));
   };
@@ -85,11 +84,14 @@ const SignUpPage = () => {
           </div>
 
           <div className="flex justify-center space-x-4">
+            {/* Apple Icon with Black Color */}
             <button className="flex items-center justify-center w-12 h-12 border rounded-lg">
-              <img src="https://www.svgrepo.com/show/475656/apple-color.svg" alt="Apple" className="w-6 h-6" />
+              <FaApple className="w-6 h-6 text-black" />
             </button>
+
+            {/* Google Icon with Google Blue Color */}
             <button className="flex items-center justify-center w-12 h-12 border rounded-lg">
-              <img src="https://www.svgrepo.com/show/475647/google-color.svg" alt="Google" className="w-6 h-6" />
+              <FaGoogle className="w-6 h-6 text-orange-700" />
             </button>
           </div>
 
@@ -101,11 +103,9 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        {/* Right Side with Overlapping Containers and Calendar */}
         <div className="w-1/2 bg-cover bg-center rounded-r-3xl relative overflow-hidden" style={{ backgroundImage: `url(${sm1})` }}>
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-          {/* Single Overlay with Light Yellowish Color and Stronger Blur */}
           <div className="absolute top-10 left-10 text-white">
             <div className="bg-yellow-500 bg-opacity-30 backdrop-blur-md p-4 rounded-lg shadow-xl hover:shadow-2xl cursor-pointer transition-shadow duration-300">
               <p className="font-semibold text-gray-800">Task Review With Team</p>
@@ -113,7 +113,6 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          {/* Glass-like Week Calendar Overlay */}
           <div className="absolute bottom-10 right-10 w-64 bg-white bg-opacity-30 backdrop-blur-md p-4 rounded-lg shadow-xl hover:shadow-2xl cursor-pointer transition-shadow duration-300">
             <div className="flex justify-between mb-4">
               <button onClick={handlePreviousWeek} className="text-sm font-semibold text-gray-800">&lt;</button>
