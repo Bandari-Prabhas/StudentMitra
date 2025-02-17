@@ -10,11 +10,16 @@ import {
 import { IoLogoAndroid } from "react-icons/io";
 import { AiOutlineMenu } from "react-icons/ai";
 import smLogo from '../assets/sm.png';
+import { useNavigate } from 'react-router-dom';
 
 const MainPage = ({ darkMode, toggleDarkMode }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate('/signup'); // Navigates to the signup route
+  };
   const images = [
     "https://assets.chaminade.edu/wp-content/uploads/2023/12/06150219/Cybersecurity-Workshop_cn-header2_1600x800-1.jpg?w=640",
     "https://vipre.com/wp-content/uploads/2024/10/security-awareness-class.jpg",
@@ -84,7 +89,12 @@ const MainPage = ({ darkMode, toggleDarkMode }) => {
             </div>
           )}
           
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Login/Signup</button>
+          <button
+      onClick={handleClick}
+      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+    >
+      Login/Signup
+    </button>
           <button onClick={toggleDarkMode} className="ml-4 p-3 rounded-full bg-blue-500 text-white">
             {darkMode ? <FaSun /> : <FaMoon />}
           </button>
