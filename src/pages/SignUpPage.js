@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import sm1 from '../assets/sm1.jpg';
-
+import { useNavigate } from 'react-router-dom';
 const SignUpPage = () => {
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(today);
+  const navigate = useNavigate();
   const handleClick = () => {
     // Add logic for sign-up success here
     // For example, after successful sign-up, navigate to SignIn page
