@@ -4,7 +4,11 @@ import sm1 from '../assets/sm1.jpg';
 const SignUpPage = () => {
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(today);
-
+  const handleClick = () => {
+    // Add logic for sign-up success here
+    // For example, after successful sign-up, navigate to SignIn page
+    navigate('/signin');
+  };
   // Function to get the current week days
   const getWeekDays = (date) => {
     const firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
