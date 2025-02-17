@@ -36,8 +36,8 @@ const SignUpPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-yellow-100 to-white flex items-center justify-center p-4">
-      <div className="bg-white shadow-xl rounded-3xl flex w-full max-w-6xl">
-        <div className="w-1/2 p-10 flex flex-col justify-between bg-gradient-to-t from-yellow-100 to-white rounded-l-3xl">
+      <div className="bg-white shadow-xl rounded-3xl flex flex-col md:flex-row w-full max-w-6xl">
+        <div className="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-between bg-gradient-to-t from-yellow-100 to-white rounded-t-3xl md:rounded-l-3xl">
           <h1 className="text-3xl font-bold mb-6 text-gray-800">Create an account</h1>
           <p className="text-lg mb-6 text-gray-600">Sign up and get 30 day free trial</p>
 
@@ -84,12 +84,10 @@ const SignUpPage = () => {
           </div>
 
           <div className="flex justify-center space-x-4">
-            {/* Apple Icon with Black Color */}
             <button className="flex items-center justify-center w-12 h-12 border rounded-lg">
               <FaApple className="w-6 h-6 text-black" />
             </button>
 
-            {/* Google Icon with Google Blue Color */}
             <button className="flex items-center justify-center w-12 h-12 border rounded-lg">
               <FaGoogle className="w-6 h-6 text-orange-700" />
             </button>
@@ -103,7 +101,7 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        <div className="w-1/2 bg-cover bg-center rounded-r-3xl relative overflow-hidden" style={{ backgroundImage: `url(${sm1})` }}>
+        <div className="w-full md:w-1/2 bg-cover bg-center rounded-b-3xl md:rounded-r-3xl relative overflow-hidden" style={{ backgroundImage: `url(${sm1})` }}>
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
           <div className="absolute top-10 left-10 text-white">
