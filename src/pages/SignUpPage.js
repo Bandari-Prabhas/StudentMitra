@@ -86,7 +86,7 @@ const SignUpPage = () => {
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">Already have an account? <a href="#" className="text-yellow-500">Sign in</a></p>
+            <p className="text-sm text-gray-600">Already have an account? <a onClick={handleClick} className="text-yellow-500">Sign in</a></p>
             <p className="text-sm text-gray-600">Terms & Conditions</p>
           </div>
         </div>
