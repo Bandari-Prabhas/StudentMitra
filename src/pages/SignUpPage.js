@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import sm1 from '../assets/sm1.jpg';
 import { useNavigate } from 'react-router-dom';
+
 const SignUpPage = () => {
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(today);
   const navigate = useNavigate();
+
   const handleClick = () => {
     // Add logic for sign-up success here
     // For example, after successful sign-up, navigate to SignIn page
     navigate('/signin');
   };
+
   // Function to get the current week days
   const getWeekDays = (date) => {
     const firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
@@ -71,7 +74,7 @@ const SignUpPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-yellow-400  text-white py-3 rounded-xl shadow-lg text-lg hover:bg-yellow-600 transition-all"
+              className="w-full bg-yellow-400 text-white py-3 rounded-xl shadow-lg text-lg hover:bg-yellow-600 transition-all"
             >
               Submit
             </button>
@@ -91,7 +94,9 @@ const SignUpPage = () => {
           </div>
 
           <div className="mt-8 text-center">
-            <p className="text-sm text-gray-600">Already have an account? <a onClick={handleClick} className="text-yellow-500">Sign in</a></p>
+            <p className="text-sm text-gray-600">Already have an account? 
+              <button onClick={handleClick} className="text-yellow-500">Sign in</button>
+            </p>
             <p className="text-sm text-gray-600">Terms & Conditions</p>
           </div>
         </div>
@@ -127,9 +132,7 @@ const SignUpPage = () => {
                 return (
                   <div
                     key={index}
-                    className={`text-center p-1 text-xs rounded-2xl ${
-                      isToday ? 'bg-red-400' : ' text-gray-800'
-                    }`}
+                    className={`text-center p-1 text-xs rounded-2xl ${isToday ? 'bg-red-400' : ' text-gray-800'}`}
                   >
                     {day.getDate()}
                   </div>
