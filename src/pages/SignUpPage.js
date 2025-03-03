@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import sm1 from '../assets/sm1.jpg';
 import { useNavigate } from 'react-router-dom';
 import { FaApple, FaGoogle } from "react-icons/fa";
-import { db, auth, provider } from "../firebase";
-import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
-import { getAuth, signInWithPopup } from "firebase/auth";
+import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import { signInWithPopup } from "firebase/auth";
+import { db, auth, provider } from '../firebase';  // Updated import
+
 // Firebase configuration
+
 
 const SignUpPage = () => {
   const today = new Date();

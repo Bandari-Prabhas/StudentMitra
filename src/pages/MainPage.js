@@ -6,20 +6,54 @@ import {
   FaTelegramPlane,
   FaWhatsapp,
   FaYoutube,
+  FaUserCircle,
 } from "react-icons/fa";
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { IoLogoAndroid } from "react-icons/io";
 import { AiOutlineMenu } from "react-icons/ai";
 import smLogo from '../assets/sm.png';
+import userIcon from '../assets/user-icon.png'; // Add your user icon image
 import { useNavigate } from 'react-router-dom';
 
-const MainPage = ({ darkMode, toggleDarkMode }) => {
+const MainPage = ({ darkMode, toggleDarkMode, isLoggedIn, onLogout, userData }) => {
+  const [user, setUser] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/signup'); // Navigates to the signup route
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleAuthClick = () => {
+    navigate(isLoggedIn ? '/profile' : '/signup');
   };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+    const handleAuthNavigation = () => {
+    if (isLoggedIn) {
+      navigate('/profile');
+    } else {
+      navigate('/signin');
+    }
+  };
+  const handleLogout = () => {
+    onLogout();
+    setShowDropdown(false);
+    navigate('/');
+  };
+  const handleLoginSignup = () => {
+    navigate('/signup');
+  };
+
   const images = [
     "https://assets.chaminade.edu/wp-content/uploads/2023/12/06150219/Cybersecurity-Workshop_cn-header2_1600x800-1.jpg?w=640",
     "https://vipre.com/wp-content/uploads/2024/10/security-awareness-class.jpg",
@@ -31,11 +65,12 @@ const MainPage = ({ darkMode, toggleDarkMode }) => {
     () => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length),
     [images.length]
   );
+
   const prevSlide = () =>
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, [nextSlide]);
 
@@ -57,50 +92,75 @@ const MainPage = ({ darkMode, toggleDarkMode }) => {
       </div>
 
       {/* Navigation Bar */}
+      {/* Navigation Bar */}
       <header className="p-6 shadow-md sticky top-0 z-50 bg-opacity-90 bg-gray-300 text-gray-700">
-        <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center">
+        
+        {/* Logo */}
         <div className="flex items-center">
-  <img src={smLogo} alt="Student Mitra Logo" className="h-16 w-[150px]" />
-</div>
+          <img src={smLogo} alt="Student Mitra Logo" className="h-16 w-[150px]" />
+        </div>
 
-          <nav className="hidden md:flex space-x-8 text-2xl font-semibold text-gray-700">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex space-x-8 text-2xl font-semibold text-gray-700">
+          <a href="#home" className="hover:text-blue-500">Home</a>
+          <a href="#about" className="hover:text-blue-500">About Us</a>
+          <a href="#workshop" className="hover:text-blue-500">Workshops</a>
+          <a href="#courses" className="hover:text-blue-500">Courses</a>
+          <a href="#mission" className="hover:text-blue-500">Our Mission & Vision</a>
+        </nav>
+
+        {/* Mobile Menu Icon */}
+        <AiOutlineMenu 
+          size={30} 
+          className="md:hidden cursor-pointer" 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+        />
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-20 left-0 w-full bg-gray-300 text-gray-700 p-4 flex flex-col space-y-4 text-xl">
             <a href="#home" className="hover:text-blue-500">Home</a>
             <a href="#about" className="hover:text-blue-500">About Us</a>
             <a href="#workshop" className="hover:text-blue-500">Workshops</a>
             <a href="#courses" className="hover:text-blue-500">Courses</a>
             <a href="#mission" className="hover:text-blue-500">Our Mission & Vision</a>
-          </nav>
+          </div>
+        )}
 
-          {/* Hamburger Icon for Mobile */}
-          <AiOutlineMenu 
-            size={30} 
-            className="md:hidden cursor-pointer" 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-          />
-
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden absolute top-20 left-0 w-full bg-gray-300 text-gray-700 p-4 flex flex-col space-y-4 text-xl">
-              <a href="#home" className="hover:text-blue-500">Home</a>
-              <a href="#about" className="hover:text-blue-500">About Us</a>
-              <a href="#workshop" className="hover:text-blue-500">Workshops</a>
-              <a href="#courses" className="hover:text-blue-500">Our Courses</a>
-              <a href="#mission" className="hover:text-blue-500">Our Mission & Vision</a>
+        {/* Authentication and Dark Mode */}
+        <div className="flex items-center gap-4">
+        {user ? (
+          <div className="relative">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => setShowDropdown(!showDropdown)}>
+              <img src={user.photoURL || "/default-user.png"} alt="User" className="h-10 w-10 rounded-full" />
+              <span className="hidden md:inline">{user.displayName || "User"}</span>
             </div>
-          )}
-          
-          <button
-      onClick={handleClick}
-      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
-    >
-      Login/Signup
-    </button>
-          <button onClick={toggleDarkMode} className="ml-4 p-3 rounded-full bg-blue-500 text-white">
-            {darkMode ? <FaSun /> : <FaMoon />}
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2">
+                <button
+                  onClick={() => navigate("/profile")}
+                  className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white w-full text-left"
+                >
+                  Profile
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="block px-4 py-2 text-gray-800 hover:bg-blue-500 hover:text-white w-full text-left"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button onClick={() => navigate('/signin')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            Login/Signup
           </button>
-        </div>
-      </header>
-
+        )}
+      </div>
+    </div>
+    </header>
       {/* Carousel Section */}
       <div className="container mx-auto my-8 relative">
         <div className="relative w-full overflow-hidden rounded-md shadow-lg h-[300px] sm:h-[400px] lg:h-[500px]">
