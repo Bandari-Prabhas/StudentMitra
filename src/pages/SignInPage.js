@@ -3,7 +3,7 @@ import sm1 from '../assets/sm1.jpg';
 import { useNavigate } from 'react-router-dom';
 import { FaApple, FaGoogle } from "react-icons/fa";
 import { auth, provider, db } from '../firebase';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { collection, query, where, getDocs, addDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 
 const SignInPage = () => {

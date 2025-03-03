@@ -6,14 +6,13 @@ import {
   FaTelegramPlane,
   FaWhatsapp,
   FaYoutube,
-  FaUserCircle,
 } from "react-icons/fa";
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { IoLogoAndroid } from "react-icons/io";
 import { AiOutlineMenu } from "react-icons/ai";
 import smLogo from '../assets/sm.png';
-import userIcon from '../assets/user-icon.png'; // Add your user icon image
+// import userIcon from '../assets/user-icon.png'; // Add your user icon image
 import { useNavigate } from 'react-router-dom';
 
 const MainPage = ({ darkMode, toggleDarkMode, isLoggedIn, onLogout, userData }) => {
@@ -157,7 +156,10 @@ const MainPage = ({ darkMode, toggleDarkMode, isLoggedIn, onLogout, userData }) 
           <button onClick={() => navigate('/signin')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
             Login/Signup
           </button>
-        )}
+          
+        )}<button onClick={toggleDarkMode} className="p-3 rounded-full bg-blue-500 text-white">
+        {darkMode ? <FaSun /> : <FaMoon />}
+      </button>
       </div>
     </div>
     </header>
